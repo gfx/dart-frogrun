@@ -16,6 +16,16 @@ main() {
 
     Process f = new Process.start("frogc", args.getRange(0, 1));
 
+    f.stdin.close();
+    f.stdout.onData = () {
+        List buffer = f.stdout.read();
+        stdout.write(buffer);
+    };
+    f.stderr.onData = () {
+        List buffer = f.stderr.read();
+        stderr.write(buffer);
+    };
+
     f.onStart = () => info("flogc started");
 
     f.onExit = (int exitCode) {
@@ -38,16 +48,6 @@ main() {
             List buffer = n.stderr.read();
             stderr.write(buffer);
         };
-    };
-
-    f.stdin.close();
-    f.stdout.onData = () {
-        List buffer = f.stdout.read();
-        stdout.write(buffer);
-    };
-    f.stderr.onData = () {
-        List buffer = f.stderr.read();
-        stderr.write(buffer);
     };
 }
 
