@@ -3,7 +3,7 @@
 
 #import("dart:io");
 
-bool DEBUG = false;
+final bool DEBUG = false;
 
 void info(message) {
     if(DEBUG) {
