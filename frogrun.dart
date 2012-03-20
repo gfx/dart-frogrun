@@ -19,7 +19,7 @@ main() {
     f.onStart = () => info("flogc started");
 
     f.onExit = (int exitCode) {
-        info("frogc finished");
+        info("frogc finished with $exitCode");
 
         if(exitCode != 0) exit(exitCode);
 
@@ -32,22 +32,22 @@ main() {
         n.stdin.close();
         n.stdout.onData = () {
             List buffer = n.stdout.read();
-            print( new String.fromCharCodes(buffer) );
+            stdout.write(buffer);
         };
         n.stderr.onData = () {
             List buffer = n.stderr.read();
-            print( new String.fromCharCodes(buffer) );
+            stderr.write(buffer);
         };
     };
 
     f.stdin.close();
     f.stdout.onData = () {
         List buffer = f.stdout.read();
-        print( new String.fromCharCodes(buffer) );
+        stdout.write(buffer);
     };
     f.stderr.onData = () {
         List buffer = f.stderr.read();
-        print( new String.fromCharCodes(buffer) );
+        stderr.write(buffer);
     };
 }
 
